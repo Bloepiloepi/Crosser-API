@@ -1,0 +1,21 @@
+#ifndef CROSSERAPI_API_UTILS_HPP
+#define CROSSERAPI_API_UTILS_HPP
+
+enum Direction {
+	STOP = 0,
+	LEFT,
+	RIGHT,
+	UP,
+	DOWN,
+	AUTO
+};
+
+enum BlockType {
+	AIR,
+	PLAYER,
+	FRUIT,
+	OBSTACLE,
+	VISITED
+};
+
+#endif //CROSSERAPI_API_UTILS_HPP
