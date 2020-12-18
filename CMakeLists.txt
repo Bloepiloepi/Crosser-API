@@ -12,9 +12,20 @@ endif()
 
 include(GNUInstallDirs)
 
-set(SOURCE_FILES src/events.cpp src/location.cpp)
-
+set(SOURCE_FILES src/events.cpp src/location.cpp src/logger.cpp include/logger.hpp include/IGame.hpp src/IGame.cpp)
 add_library(CrosserAPI ${SOURCE_FILES})
+
+#SFML Part
+set(SFML_INCLUDE_DIR "SFML/include")
+set(SFML_LIBRARY_DIR "SFML/build/lib")
+
+link_directories(SFML_LIBRARY_DIR)
+include_directories(SFML_INCLUDE_DIR)
+
+find_package(SFML COMPONENTS system window graphics network audio REQUIRED)
+
+target_link_libraries(CrosserAPI PUBLIC sfml-graphics sfml-window sfml-system)
+#End SFML Part
 
 target_include_directories(CrosserAPI PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

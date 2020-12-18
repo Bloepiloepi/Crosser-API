@@ -13,35 +13,39 @@ namespace crs {
 	};
 
 	class Event {
-		bool cancelled = false;
 		const EventType type;
 
 	protected:
 		Event(const EventType &type);
 
 	public:
-		[[maybe_unused]] void setCancelled(bool cancel);
-		[[maybe_unused]] [[nodiscard]] bool isCancelled() const;
-
-		EventType getType();
+		[[maybe_unused]] EventType getType();
 	};
 
-	class QuitEvent : public Event {
+	class Cancelable {
+		bool cancelled = false;
+
+	public:
+		[[maybe_unused]] void setCancelled(bool cancel);
+		[[maybe_unused]] [[nodiscard]] bool isCancelled() const;
+	};
+
+	class QuitEvent : public Event, public Cancelable {
 	public:
 		QuitEvent();
 	};
 
-	class MoveEvent : public Event {
+	class MoveEvent : public Event, public Cancelable {
 		const Direction direction;
 		Location *newLocation;
 
 	public:
-		[[maybe_unused]] MoveEvent(const Direction& direction, Location& newLocation);
+		[[maybe_unused]] MoveEvent(const Direction& direction, Location* newLocation);
 
-		[[maybe_unused]] [[nodiscard]] Location getNewLocation() const;
+		[[maybe_unused]] [[nodiscard]] Location *getNewLocation() const;
 		[[maybe_unused]] [[nodiscard]] Direction getDirection() const;
 
-		[[maybe_unused]] void setNewLocation(Location& newLoc);
+		[[maybe_unused]] void setNewLocation(Location* newLoc);
 	};
 
 	class CrossFoundEvent : public Event {
@@ -49,12 +53,14 @@ namespace crs {
 		Location *newCrossLocation;
 
 	public:
+		~CrossFoundEvent();
+
 		[[maybe_unused]] CrossFoundEvent(const Location& oldLoc, Location* newLoc);
 
 		[[maybe_unused]] [[nodiscard]] Location getOldCrossLocation() const;
 		[[maybe_unused]] [[nodiscard]] Location *getNewCrossLocation() const;
 
-		[[maybe_unused]] void setNewCrossLocation(Location newCrossLocation);
+		[[maybe_unused]] void setNewCrossLocation(Location* newCrossLocation);
 	};
 }
 
