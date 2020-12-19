@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(CrosserAPI VERSION 0.4)
+project(CrosserAPI VERSION 1.2 DESCRIPTION "The API for Crosser.")
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -12,18 +12,11 @@ endif()
 
 include(GNUInstallDirs)
 
-set(SOURCE_FILES src/events.cpp src/location.cpp src/logger.cpp include/logger.hpp include/IGame.hpp src/IGame.cpp)
+set(SOURCE_FILES src/events.cpp src/location.cpp src/logger.cpp src/IGame.cpp)
 add_library(CrosserAPI ${SOURCE_FILES})
 
 #SFML Part
-set(SFML_INCLUDE_DIR "SFML/include")
-set(SFML_LIBRARY_DIR "SFML/build/lib")
-
-link_directories(SFML_LIBRARY_DIR)
-include_directories(SFML_INCLUDE_DIR)
-
 find_package(SFML COMPONENTS system window graphics network audio REQUIRED)
-
 target_link_libraries(CrosserAPI PUBLIC sfml-graphics sfml-window sfml-system)
 #End SFML Part
 
@@ -34,6 +27,10 @@ target_include_directories(CrosserAPI PUBLIC
 
 set_target_properties(CrosserAPI PROPERTIES
         VERSION ${PROJECT_VERSION})
+set_target_properties(CrosserAPI PROPERTIES
+        DESCRIPTION ${PROJECT_DESCRIPTION})
+
+configure_file(CrosserAPI.pc.in CrosserAPI.pc @ONLY)
 
 install(TARGETS CrosserAPI EXPORT CrosserAPIConfig
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -41,6 +38,8 @@ install(TARGETS CrosserAPI EXPORT CrosserAPIConfig
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(DIRECTORY include/ DESTINATION
         ${CMAKE_INSTALL_INCLUDEDIR}/CrosserAPI)
+install(FILES ${CMAKE_BINARY_DIR}/CrosserAPI.pc
+        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 
 install(EXPORT CrosserAPIConfig DESTINATION share/CrosserAPI/cmake)
 
