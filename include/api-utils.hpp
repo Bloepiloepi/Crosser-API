@@ -13,7 +13,6 @@ namespace crs {
 
 	enum TileType {
 		AIR,
-		PLAYER,
 		FRUIT,
 		OBSTACLE,
 		VISITED

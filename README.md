@@ -7,12 +7,7 @@ When creating plugins for Crosser, make sure you have Crosser itself installed. 
 ## Building the API
 If you already have Crosser installed, you can skip this step because you have already done it (since Crosser needs the API to function).
 
-- Make sure you have homebrew installed
-- Make sure you have sfml and cmake installed using homebrew
-```shell
-brew install sfml
-brew install cmake
-```
+- Make sure you have sfml and cmake installed
 - Clone this repository
 - Cd to the project root
 - Execute this command to build, replacing ```/path/to/target/folder``` with any folder you want to use:

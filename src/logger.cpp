@@ -1,14 +1,6 @@
 #include <iostream>
 #include "logger.hpp"
 
-void Logger::info(const std::string& info) {
-	std::cout << "[INFO]: " << info << std::endl;
-}
-
-void Logger::warn(const std::string& warning) {
-	std::cerr << "[WARNING]: " << warning << std::endl;
-}
-
-void Logger::error(const std::string& error) {
-	std::cerr << "[ERROR]: " << error << std::endl;
-}
+[[maybe_unused]] const std::string Logger::info = "[INFO]: ";
+[[maybe_unused]] const std::string Logger::warning = "[WARNING]: ";
+[[maybe_unused]] const std::string Logger::error = "[ERROR]: ";

@@ -5,9 +5,9 @@
 
 class Logger {
 public:
-	static void info(const std::string& info);
-	static void warn(const std::string& warning);
-	static void error(const std::string& error);
+	[[maybe_unused]] static const std::string info;
+	[[maybe_unused]] static const std::string warning;
+	[[maybe_unused]] static const std::string error;
 };
 
 #endif //CROSSERAPI_LOGGER_HPP

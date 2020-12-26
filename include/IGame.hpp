@@ -9,8 +9,6 @@ namespace crs {
 
 	class IGame {
 	public:
-		IGame();
-
 		[[nodiscard]] virtual bool isGameOver() const = 0;
 		[[nodiscard]] virtual int getScore() const = 0;
 		[[nodiscard]] virtual sf::Font getMainFont() const = 0;
@@ -22,8 +20,6 @@ namespace crs {
 		virtual void setTileType(const Location& location, TileType type) = 0;
 		virtual TileType getTileType(const Location& location) = 0;
 	};
-
-	static IGame* currentGame;
 }
 
 #endif //CROSSERAPI_IGAME_HPP
